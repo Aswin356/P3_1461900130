@@ -16,7 +16,7 @@ class rakbukuController extends Controller
      */
     public function index()
     {
-        $users = DB::table('rakbuku')->get();
+        $rakbukus = DB::table('jenis_buku')->get();
 
         return view('welcome', ['rakbukus' => $rakbukus]);
     }
@@ -28,7 +28,7 @@ class rakbukuController extends Controller
      */
     public function create()
     {
-        //
+        return view('create0130');
     }
 
     /**
@@ -39,7 +39,11 @@ class rakbukuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('jenis_buku')->insert([
+            'jenis' => $request->nama,
+        ]);
+
+        return redirect('/');
     }
 
     /**
@@ -61,7 +65,8 @@ class rakbukuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $buku = DB::table('jenis_buku')->find($id);
+        return view('edit0130', ['jenis_buku' => $buku]);
     }
 
     /**
@@ -73,7 +78,14 @@ class rakbukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jenis_buku = DB::table('jenis_buku')->find($id);
+        // $guru->update($request->all());
+        DB::table('jenis_buku')
+            ->where('id', $id)
+            ->update([
+                'jenis' => $request->nama,
+            ]);
+        return redirect('/');
     }
 
     /**
@@ -84,6 +96,7 @@ class rakbukuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('jenis_buku')->where('id', '=', $id)->delete();
+        return back();
     }
 }

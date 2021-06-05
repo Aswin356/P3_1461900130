@@ -15,3 +15,9 @@ use App\Http\Controllers\rakbukuController;
 */
 
 Route::get('/', [rakbukuController::class, 'index']);
+Route::post('/', [rakbukuController::class, 'store']);
+Route::get('/create', [rakbukuController::class, 'create']);
+Route::get('/edit/{id}', [rakbukuController::class, 'edit']);
+Route::post('/edit/{id}', [rakbukuController::class, 'update']);
+Route::get('/delete/{id}', [rakbukuController::class, 'destroy']);
+
